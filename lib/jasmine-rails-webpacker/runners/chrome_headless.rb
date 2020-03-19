@@ -104,11 +104,14 @@ module Jasmine
 
       def wait_for_chrome_to_start_debug_socket
         open_socket = -> do
-          conn = TCPSocket.new('localhost', 9222)
-          conn.close
-          true
-        rescue
-          nil
+          begin
+            conn = TCPSocket.new('localhost', 9222)
+            conn.close
+            true
+          rescue
+            nil
+          end
+        end
         message = "Chrome didn't seem to start the webSocketDebugger at port: 9222, timeout #{config.chrome_options[:startup_timeout]}sec"
         raise message unless wait_for(&open_socket)
       end
