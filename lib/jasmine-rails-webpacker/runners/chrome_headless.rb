@@ -109,8 +109,6 @@ module Jasmine
           true
         rescue
           nil
-        end
-
         message = "Chrome didn't seem to start the webSocketDebugger at port: 9222, timeout #{config.chrome_options[:startup_timeout]}sec"
         raise message unless wait_for(&open_socket)
       end
